@@ -6,14 +6,12 @@
   ([] (vec (range 0 9)))
   ([size] (vec (range 0 (* size size)))))
 
-(defn mark-position
-  [board position mark]
+(defn mark-position [board position mark]
   (if (get board position)
     (assoc board position mark)
     (throw (Exception. "Invalid Move"))))
 
-(defn winner?
-  [board]
+(defn winner? [board]
   (some true?
         (map #(apply = %)
              (apply concat (list (rows board) (columns board) (diagonals board))))))
@@ -36,5 +34,4 @@
   (let [r (range (count (rows board)))]
     (concat
     (vector (map #(nth %1 %2) (rows board) r))
-    (vector (map #(nth %1 %2) (rows board) (reverse r))))
-  ))
+    (vector (map #(nth %1 %2) (rows board) (reverse r))))))
