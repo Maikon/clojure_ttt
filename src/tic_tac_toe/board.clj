@@ -23,6 +23,9 @@
     (int (Math/sqrt (count board)))
     board))
 
+(defn available-moves [board]
+  (filter number? board))
+
 (defn- columns [board]
   (apply map list (rows board)))
 

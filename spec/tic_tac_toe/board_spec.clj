@@ -67,4 +67,14 @@
                    (it "second diagonal"
                        (should= true (winner? [0 1 "x"
                                                3 "x" 5
-                                               "x" 7 8])))))
+                                               "x" 7 8]))))
+          (context "available moves"
+                   (it "returns empty if none"
+                       (should-be empty? (available-moves ["x" "o" "x"
+                                                           "o" "x" "o"
+                                                           "o" "x" "o"])))
+
+                   (it "returns list of moves if any"
+                       (should= [0 4 8] (available-moves [0 "o" "x"
+                                                          "o" 4 "o"
+                                                          "o" "x" 8])))))
