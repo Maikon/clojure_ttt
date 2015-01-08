@@ -89,4 +89,10 @@
                    (it "when game is a draw"
                        (should= true (over? ["x" "o" "x"
                                              "o" "x" "o"
-                                             "o" "x" "o"])))))
+                                             "o" "x" "o"]))))
+          (context "current mark"
+                   (it "'x' goes first"
+                       (should= "x" (current-mark (new-board))))
+
+                   (it "'o' goes second"
+                       (should= "o" (current-mark ["x" 1 2 3 4 5 6 7 8])))))

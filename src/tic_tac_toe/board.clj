@@ -27,6 +27,11 @@
 (defn over? [board]
   (or (winner? board) (empty? (available-moves board))))
 
+(defn current-mark [board]
+  (if (odd? (count (available-moves board)))
+    "x"
+    "o"))
+
 (defn- columns [board]
   (apply map list (rows board)))
 
