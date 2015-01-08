@@ -77,4 +77,16 @@
                    (it "returns list of moves if any"
                        (should= [0 4 8] (available-moves [0 "o" "x"
                                                           "o" 4 "o"
-                                                          "o" "x" 8])))))
+                                                          "o" "x" 8]))))
+          (context "board status"
+                   (it "when game is ongoing"
+                       (should= false (over? (new-board))))
+
+                   (it "when game has a winner"
+                       (should= true (over? ["x" 1  2
+                                              3 "x" 5
+                                              6  7 "x"])))
+                   (it "when game is a draw"
+                       (should= true (over? ["x" "o" "x"
+                                             "o" "x" "o"
+                                             "o" "x" "o"])))))

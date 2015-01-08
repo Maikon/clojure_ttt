@@ -26,6 +26,9 @@
 (defn available-moves [board]
   (filter number? board))
 
+(defn over? [board]
+  (or (winner? board) (empty? (available-moves board))))
+
 (defn- columns [board]
   (apply map list (rows board)))
 
