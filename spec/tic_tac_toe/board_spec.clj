@@ -9,10 +9,15 @@
           (it "board size can vary"
               (should= 16 (count (new-board 4))))
 
-          (it "mark a position"
-              (should=
-                ["x" 1 2 3 4 5 6 7 8]
-                (mark-position (new-board) 0 "x")))
+          (context "making a move"
+                   (it "marks a position if move is valid"
+                       (should=
+                         ["x" 1 2 3 4 5 6 7 8]
+                         (mark-position (new-board) 0 "x")))
+
+                   (it "raises custom exception if move is invalid"
+                       (should-throw Exception "Invalid Move"
+                                     (mark-position (new-board) 10 "x"))))
 
           (it "returns the rows"
               (should=

@@ -8,7 +8,9 @@
 
 (defn mark-position
   [board position mark]
-  (assoc board position mark))
+  (if (get board position)
+    (assoc board position mark)
+    (throw (Exception. "Invalid Move"))))
 
 (defn winner?
   [board]
