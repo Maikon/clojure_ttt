@@ -3,8 +3,8 @@
 (declare rows columns diagonals)
 
 (defn new-board
-  ([] (vec (range 0 9)))
-  ([size] (vec (range 0 (* size size)))))
+  ([] (vec (take 9 (repeat ""))))
+  ([size] (vec (take (* size size) (repeat "")))))
 
 (defn mark-position [board position mark]
   (if (get board position)
@@ -13,7 +13,7 @@
 
 (defn winner? [board]
   (some true?
-        (map #(apply = %)
+        (map #(and (not (every? empty? %)) (apply = %))
              (apply concat (list (rows board) (columns board) (diagonals board))))))
 
 (defn rows [board]
@@ -22,7 +22,7 @@
     board))
 
 (defn available-moves [board]
-  (filter number? board))
+  (filter number? (flatten (filter #(empty? (% 1)) (map-indexed vector board)))))
 
 (defn over? [board]
   (or (winner? board) (empty? (available-moves board))))
