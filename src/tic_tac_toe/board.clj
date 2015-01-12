@@ -22,7 +22,9 @@
     board))
 
 (defn available-moves [board]
-  (filter number? (flatten (filter #(empty? (% 1)) (map-indexed vector board)))))
+  (filter number?
+          (flatten (filter #(empty? (% 1))
+                           (map-indexed vector board)))))
 
 (defn over? [board]
   (or (winner? board) (empty? (available-moves board))))
@@ -38,5 +40,5 @@
 (defn- diagonals [board]
   (let [r (range (count (rows board)))]
     (concat
-    (vector (map #(nth %1 %2) (rows board) r))
-    (vector (map #(nth %1 %2) (rows board) (reverse r))))))
+      (vector (map #(nth %1 %2) (rows board) r))
+      (vector (map #(nth %1 %2) (rows board) (reverse r))))))
