@@ -1,21 +1,21 @@
 (ns tic_tac_toe.board)
 
-(declare rows columns diagonals)
+(declare rows columns diagonals
+         position-available? lines all-equal-not-empty)
 
 (defn new-board
   ([] (vec (take 9 (repeat ""))))
   ([size] (vec (take (* size size) (repeat "")))))
 
 (defn mark-position [board position mark]
-  (let [pos (get board position)]
-  (if (and pos (empty? pos))
+  (if (position-available? board position)
     (assoc board position mark)
-    board)))
+    board))
 
 (defn winner? [board]
   (some true?
-        (map #(and (not (every? empty? %)) (apply = %))
-             (apply concat (list (rows board) (columns board) (diagonals board))))))
+        (map #(all-equal-not-empty %)
+             (lines board))))
 
 (defn rows [board]
   (partition
@@ -34,6 +34,16 @@
   (if (odd? (count (available-moves board)))
     "x"
     "o"))
+
+(defn- position-available? [board position]
+  (let [pos (get board position)]
+    (and pos (empty? pos))))
+
+(defn- lines [board]
+  (apply concat (list (rows board) (columns board) (diagonals board))))
+
+(defn- all-equal-not-empty [line]
+  (and (not (every? empty? line)) (apply = line)))
 
 (defn- columns [board]
   (apply map list (rows board)))
