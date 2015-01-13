@@ -13,13 +13,19 @@
                                   "" "" ""
                                   "" "" ""]))))
 
-  (it "asks for user input"
-    (should=
-      "Please choose a move\n"
-      (with-out-str (with-in-str "1" (get-move)))))
+  (context "getting move from user"
+    (it "asks for user input"
+      (should=
+        "Please choose a move\n"
+        (with-out-str (with-in-str "1" (get-move)))))
 
-  (it "asks for user input"
-    (should=
-      "Please choose a move\n"
-      (with-out-str (with-in-str "1" (get-move))))))
+    (it "returns user input"
+      (should=
+        0
+        (with-in-str "1" (get-move))))
+
+    (it "validates the move"
+      (should=
+        1
+        (with-in-str "some-invalid-move\n2" (get-move))))))
 

@@ -10,4 +10,7 @@
 
 (defn get-move []
   (println "Please choose a move")
-  (read-line))
+  (let [input (read-string (read-line))]
+    (if (number? input)
+      (dec input)
+      (get-move))))
