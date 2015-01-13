@@ -15,9 +15,15 @@
                          ["x" "" "" "" "" "" "" "" ""]
                          (mark-position (new-board) 0 "x")))
 
-                   (it "raises custom exception if move is invalid"
-                       (should-throw Exception "Invalid Move"
-                                     (mark-position (new-board) 10 "x"))))
+                   (it "returns the board unchanged if move invalid"
+                       (should=
+                         ["" "" "" "" "" "" "" "" ""]
+                         (mark-position (new-board) 10 "x")))
+
+                   (it "returns the board unchanged if position is taken"
+                       (should=
+                         ["x" "" "" "" "" "" "" "" ""]
+                         (mark-position ["x" "" "" ""  "" "" ""  "" ""] 0 "o"))))
 
           (it "returns the rows"
               (should=

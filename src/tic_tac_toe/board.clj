@@ -7,9 +7,10 @@
   ([size] (vec (take (* size size) (repeat "")))))
 
 (defn mark-position [board position mark]
-  (if (get board position)
+  (let [pos (get board position)]
+  (if (and pos (empty? pos))
     (assoc board position mark)
-    (throw (Exception. "Invalid Move"))))
+    board)))
 
 (defn winner? [board]
   (some true?

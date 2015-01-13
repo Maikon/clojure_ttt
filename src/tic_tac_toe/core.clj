@@ -7,7 +7,7 @@
   (loop [board (new-board)]
     (print-board board)
     (if (not (over? board))
-    (recur (mark-position
-             board
-             (dec (read-string (get-move)))
-             (current-mark board))))))
+      (recur (mark-position
+               board
+               (get-move)
+               (current-mark board))))))
