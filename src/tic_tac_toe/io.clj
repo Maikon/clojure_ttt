@@ -14,3 +14,12 @@
     (if (number? input)
       (dec input)
       (get-move))))
+
+(defn get-game-choice []
+  (let [options {"1" :hvh "2" :hvc}
+        input (options (read-line))]
+  (println "Please choose a game option from 1-2:")
+  (println "1) Human vs Com 2) Human vs Com")
+  (if input
+    input
+    (get-game-choice))))

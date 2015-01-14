@@ -27,5 +27,21 @@
     (it "validates the move"
       (should=
         1
-        (with-in-str "some-invalid-move\n2" (get-move))))))
+        (with-in-str "some-invalid-move\n2" (get-move)))))
+
+  (context "getting game choice"
+    (it "asks the user to select game"
+      (should=
+        "Please choose a game option from 1-2:\n1) Human vs Com 2) Human vs Com\n"
+        (with-out-str (with-in-str "1" (get-game-choice)))))
+
+    (it "returns correct form of user's game choice"
+      (should=
+        :hvh
+        (with-in-str "1" (get-game-choice))))
+
+    (it "validates the game choice"
+      (should=
+        :hvh
+        (with-in-str "invalid-choice\n1" (get-game-choice))))))
 
