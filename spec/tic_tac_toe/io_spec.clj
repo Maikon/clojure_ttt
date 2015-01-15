@@ -24,10 +24,15 @@
         0
         (with-in-str "1" (get-move))))
 
-    (it "validates the move"
+    (it "handles wrong input"
       (should=
         1
-        (with-in-str "some-invalid-move\n2" (get-move)))))
+        (with-in-str "some-invalid-move\n2" (get-move))))
+
+    (it "handles empty input"
+      (should=
+        1
+        (with-in-str "\n2" (get-move)))))
 
   (context "getting game choice"
     (it "asks the user to select game"

@@ -10,9 +10,9 @@
 
 (defn get-move []
   (println "Please choose a move")
-  (let [input (read-string (read-line))]
-    (if (number? input)
-      (dec input)
+  (let [input (read-line)]
+    (if (and (not (empty? input)) (number? (read-string input)))
+      (dec (read-string input))
       (get-move))))
 
 (defn get-game-choice []
