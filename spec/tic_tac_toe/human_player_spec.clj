@@ -1,14 +1,14 @@
 (ns tic_tac_toe.human_player_spec
   (:require [speclj.core :refer :all]
-            [tic_tac_toe.human_player :refer :all]))
+            [tic_tac_toe.player :as player]
+            [tic_tac_toe.human_player :as human]
+            [tic_tac_toe.io :as io]))
 
 (describe "Human Player"
-  (before
-    (def board ["" "" ""
-                "" "" ""
-                "" "" ""]))
+  (around [it]
+    (with-out-str (it)))
 
-  (it "makes a move on a board"
+  (it "returns a valid move"
     (should=
-      ["x" "" "" "" "" "" "" "" ""]
-      (make-move board 0 "x"))))
+      1
+      (with-in-str "2\n" (player/get-move {:type :human :move io/get-move})))))
