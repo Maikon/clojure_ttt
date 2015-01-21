@@ -13,9 +13,13 @@
     board))
 
 (defn winner?
-  ([board] (some true?  (map #(all-equal-not-empty %) (lines board))))
-  ([board mark] (some true? (map #(apply = mark %) (lines board))))
-  )
+  ([board] (->> (lines board)
+                (map (partial all-equal-not-empty))
+                (some true?)))
+
+  ([board mark] (->> (lines board)
+                     (map (partial all-equal-not-empty mark))
+                     (some true?))))
 
 (defn rows [board]
   (partition
@@ -42,8 +46,9 @@
 (defn- lines [board]
   (apply concat (list (rows board) (columns board) (diagonals board))))
 
-(defn- all-equal-not-empty [line]
-  (and (not (every? empty? line)) (apply = line)))
+(defn- all-equal-not-empty
+  ([line] (and (not (every? empty? line)) (apply = line)))
+  ([mark line] (apply = mark line)))
 
 (defn- columns [board]
   (apply map list (rows board)))
