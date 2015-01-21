@@ -1,5 +1,5 @@
 (ns tic_tac_toe.io
-  (:require [tic_tac_toe.board :refer :all :as board]))
+  (:require [tic_tac_toe.board :as board]))
 
 (defn print-board [brd]
  (let [pos-counter (range 1 10)]
