@@ -12,10 +12,10 @@
     (assoc board position mark)
     board))
 
-(defn winner? [board]
-  (some true?
-        (map #(all-equal-not-empty %)
-             (lines board))))
+(defn winner?
+  ([board] (some true?  (map #(all-equal-not-empty %) (lines board))))
+  ([board mark] (some true? (map #(apply = mark %) (lines board))))
+  )
 
 (defn rows [board]
   (partition

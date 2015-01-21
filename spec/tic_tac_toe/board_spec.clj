@@ -74,6 +74,18 @@
       (should= true (winner? ["" "" "x"
                               "" "x" ""
                               "x" "" ""]))))
+
+  (context "checking for specific winner"
+    (it "it's positive if given mark has won"
+      (should=
+        true
+        (winner? ["x" "x" "x" "" "o" "" "o" "" ""] "x")))
+
+    (it "it's negative otherwise"
+      (should=
+        true
+        (nil? (winner? ["x" "x" "x" "" "o" "" "o" "" ""] "o")))))
+
   (context "available moves"
     (it "returns empty if none"
       (should-be empty? (available-moves ["x" "o" "x"
