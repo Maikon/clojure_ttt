@@ -44,8 +44,7 @@
     (it "third row"
       (should= true (winner? ["" "" ""
                               "" "" ""
-                              "x" "x" "x"])))
-    )
+                              "x" "x" "x"]))))
 
   (context "winning columns"
     (it "first column"
@@ -61,8 +60,7 @@
     (it "third column"
       (should= true (winner? ["" "" "x"
                               "" "" "x"
-                              "" "" "x"])))
-    )
+                              "" "" "x"]))))
 
   (context "winning diagonals"
     (it "first diagonal"

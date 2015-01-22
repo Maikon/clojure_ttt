@@ -10,10 +10,7 @@
 (defn score-board [board]
   (let [score (/ 10.0 (- (count board)
                         (count (available-moves board))))]
-  (cond
-    (winner? board (current-mark board)) score
-    (and (over? board) (not (winner? board))) 0
-    :else (unchecked-negate score))))
+    (- score)))
 
 (defn next-board-with-move [board move]
   {:board (mark-position board move (current-mark board))
