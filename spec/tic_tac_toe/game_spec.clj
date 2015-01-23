@@ -23,4 +23,12 @@
     (it "switches the players"
       (should=
         [{:type :computer} {:type :human}]
-        (switch-players [{:type :human} {:type :computer}]))))
+        (switch-players [{:type :human} {:type :computer}])))
+
+    (context "turn of players"
+      (it "is changed when a move is made"
+        (should= {:board ["x" "" "" "" "" "" "" "" ""]
+                  :players [{:type :computer} {:type :human}]}
+                 (with-in-str "1\n" (next-player-makes-move
+                                      ["" "" "" "" "" "" "" "" ""]
+                                      [{:type :human} {:type :computer}]))))))
