@@ -18,4 +18,9 @@
 
   (it "displays the board"
     (let [game (with-in-str "1\n5\n2\n9\n3" (play))]
-      (should-have-invoked :print-board))))
+      (should-have-invoked :print-board)))
+
+    (it "switches the players"
+      (should=
+        [{:type :computer} {:type :human}]
+        (switch-players [{:type :human} {:type :computer}]))))

@@ -11,3 +11,6 @@
                (io/get-move)
                (board/current-mark board)))
       board)))
+
+(defn switch-players [players]
+  (reverse players))
