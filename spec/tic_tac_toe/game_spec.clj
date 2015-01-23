@@ -18,6 +18,15 @@
         (play {:board ["" "" "" "" "" "" "" "" ""]
                :players [{:type :human} {:type :human}]}))))
 
+  (it "associates the correct board with the computer player"
+    (should=
+      {:board ["x" "" "x" "o" "o" "o" "" "" "x"]
+       :players [{:type :human} {:type :computer}]}
+      (with-in-str
+        "1\n4\n9\n"
+        (play {:board ["x" "" "x" "o" "" "o" "" "" "x"]
+               :players [{:type :computer} {:type :human}]}))))
+
   (it "displays the board"
     (let [game (with-in-str
                  "1\n5\n2\n9\n3"
