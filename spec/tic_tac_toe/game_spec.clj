@@ -25,11 +25,6 @@
                         :players [{:type :human} {:type :human}]}))]
       (should-have-invoked :print-board)))
 
-  (it "switches the players"
-    (should=
-      [{:type :computer} {:type :human}]
-        (switch-players [{:type :human} {:type :computer}])))
-
     (context "turn of players"
       (it "is changed when a move is made"
         (should= {:board ["x" "" "" "" "" "" "" "" ""]
