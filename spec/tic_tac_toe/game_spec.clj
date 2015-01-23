@@ -9,20 +9,25 @@
   (around [it]
     (with-out-str (with-redefs [print-board @print-board-stub] (it))))
 
-  (it "plays the game until the end"
+  (it "plays the game with specific players"
     (should=
-      ["x" "x" "x"
-       ""  "o"  ""
-       ""  ""  "o"]
-      (with-in-str "1\n5\n2\n9\n3" (play))))
+      {:board ["x" "x" "x" "" "o" "" "" "" "o"]
+       :players [{:type :human} {:type :human}]}
+      (with-in-str
+        "1\n5\n2\n9\n3"
+        (play {:board ["" "" "" "" "" "" "" "" ""]
+               :players [{:type :human} {:type :human}]}))))
 
   (it "displays the board"
-    (let [game (with-in-str "1\n5\n2\n9\n3" (play))]
+    (let [game (with-in-str
+                 "1\n5\n2\n9\n3"
+                 (play {:board ["" "" "" "" "" "" "" "" ""]
+                        :players [{:type :human} {:type :human}]}))]
       (should-have-invoked :print-board)))
 
-    (it "switches the players"
-      (should=
-        [{:type :computer} {:type :human}]
+  (it "switches the players"
+    (should=
+      [{:type :computer} {:type :human}]
         (switch-players [{:type :human} {:type :computer}])))
 
     (context "turn of players"

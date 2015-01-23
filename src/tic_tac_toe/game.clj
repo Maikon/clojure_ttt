@@ -4,15 +4,14 @@
             [tic_tac_toe.player :as player]
             [tic_tac_toe.human_player]))
 
-(defn play []
-  (loop [board (board/new-board)]
-    (io/print-board board)
-    (if (not (board/over? board))
-      (recur (board/mark-position
-               board
-               (io/get-move)
-               (board/current-mark board)))
-      board)))
+(declare next-player-makes-move)
+
+(defn play [game]
+   (loop [updated-game game]
+     (io/print-board (:board updated-game))
+     (if (not (board/over? (:board updated-game)))
+       (recur (next-player-makes-move (:board updated-game) (:players updated-game)))
+       updated-game)))
 
 (defn switch-players [players]
   (reverse players))
