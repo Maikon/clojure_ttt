@@ -18,7 +18,9 @@
   (let [new-board (board/mark-position board
                                        (player/get-move (first players))
                                        (board/current-mark board))]
-    (hash-map :board new-board :players (switch-players players))))
+    (if (= new-board board)
+      (hash-map :board board :players players)
+      (hash-map :board new-board :players (switch-players players)))))
 
 (defn- switch-players [players]
   (reverse players))

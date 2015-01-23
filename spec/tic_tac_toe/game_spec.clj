@@ -31,4 +31,11 @@
                   :players [{:type :computer} {:type :human}]}
                  (with-in-str "1\n" (next-player-makes-move
                                       ["" "" "" "" "" "" "" "" ""]
+                                      [{:type :human} {:type :computer}]))))
+
+      (it "is not changed when an invalid move is made"
+        (should= {:board ["x" "" "" "" "" "" "" "" ""]
+                  :players [{:type :human} {:type :computer}]}
+                 (with-in-str "1\n" (next-player-makes-move
+                                      ["x" "" "" "" "" "" "" "" ""]
                                       [{:type :human} {:type :computer}]))))))
