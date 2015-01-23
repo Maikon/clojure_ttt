@@ -37,16 +37,16 @@
   (context "getting game choice"
     (it "asks the user to select game"
       (should=
-        "Please choose a game option from 1-2:\n1) Human vs Com 2) Human vs Com\n"
+        "Please choose a game option from 1-2:\n1) Human vs Human 2) Human vs Computer 3) Computer vs Human 4) Computer vs Computer\n"
         (with-out-str (with-in-str "1" (get-game-choice)))))
 
     (it "returns correct form of user's game choice"
       (should=
-        :hvh
+        [{:type :human} {:type :human}]
         (with-in-str "1" (get-game-choice))))
 
     (it "validates the game choice"
       (should=
-        :hvh
+        [{:type :human} {:type :human}]
         (with-in-str "invalid-choice\n1" (get-game-choice))))))
 

@@ -1,5 +1,6 @@
 (ns tic_tac_toe.io
-  (:require [tic_tac_toe.board :as board]))
+  (:require [tic_tac_toe.board :as board]
+            [tic_tac_toe.players :as players]))
 
 (defn print-board [brd]
  (let [pos-counter (range 1 10)]
@@ -16,10 +17,9 @@
       (get-move))))
 
 (defn get-game-choice []
-  (let [options {"1" :hvh "2" :hvc}
-        input (options (read-line))]
-  (println "Please choose a game option from 1-2:")
-  (println "1) Human vs Com 2) Human vs Com")
-  (if input
-    input
-    (get-game-choice))))
+  (println "Please choose a game option from 1-4:")
+  (println "1) Human vs Human 2) Human vs Computer 3) Computer vs Human 4) Computer vs Computer")
+  (let [choice (players/get-choice (read-line))]
+    (if choice
+      choice
+      (get-game-choice))))
