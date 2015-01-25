@@ -5,6 +5,7 @@
   (:gen-class :main true))
 
 (defn -main []
-  (let [players (io/get-game-choice)]
-    (game/play {:board (new-board)
+  (let [players (io/get-game-choice)
+        choice (io/get-board-size)]
+    (game/play {:board (new-board (:board-size choice))
                 :players players})))

@@ -6,12 +6,19 @@
   (around [it]
     (with-out-str (it)))
 
-  (it "it prints the board"
+  (it "it prints a 3x3 board"
     (should=
       "\n1 | 2 | 3 \n4 | 5 | 6 \n7 | 8 | 9\n"
       (with-out-str (print-board ["" "" ""
                                   "" "" ""
                                   "" "" ""]))))
+  (it "it prints a 4x4 board"
+    (should=
+      "\n1 | 2 | 3 | 4 \n5 | 6 | 7 | 8 \n9 | 10 | 11 | 12 \n13 | 14 | 15 | 16\n"
+      (with-out-str (print-board ["" "" "" ""
+                                  "" "" "" ""
+                                  "" "" "" ""
+                                  "" "" "" ""]))))
 
   (context "getting move from user"
     (it "asks for user input"
@@ -37,7 +44,7 @@
   (context "getting game choice"
     (it "asks the user to select game"
       (should=
-        "Please choose a game option from 1-2:\n1) Human vs Human 2) Human vs Computer 3) Computer vs Human 4) Computer vs Computer\n"
+        "Please choose a game option from 1-4:\n1) Human vs Human 2) Human vs Computer 3) Computer vs Human 4) Computer vs Computer\n"
         (with-out-str (with-in-str "1" (get-game-choice)))))
 
     (it "returns correct form of user's game choice"
@@ -48,5 +55,25 @@
     (it "validates the game choice"
       (should=
         [{:type :human} {:type :human}]
-        (with-in-str "invalid-choice\n1" (get-game-choice))))))
+        (with-in-str "invalid-choice\n1" (get-game-choice)))))
 
+  (context "choosing board size"
+    (it "asks user for the size"
+      (should=
+        "Please choose a board size:\n1) 3x3 2) 4x4\n"
+        (with-out-str (with-in-str "1" (get-board-size)))))
+
+    (it "returns user input for 3x3"
+      (should=
+        {:board-size 3}
+        (with-in-str "1" (get-board-size))))
+
+    (it "returns user input for 4x4"
+      (should=
+        {:board-size 4}
+        (with-in-str "2" (get-board-size))))
+
+    (it "validates user choice"
+      (should=
+        {:board-size 3}
+        (with-in-str "invalid\n1" (get-board-size))))))

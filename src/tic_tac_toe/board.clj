@@ -1,7 +1,8 @@
 (ns tic_tac_toe.board)
 
 (declare rows columns diagonals
-         position-available? lines all-equal-not-empty)
+         position-available? lines all-equal-not-empty
+         moves-made)
 
 (defn new-board
   ([] (vec (take 9 (repeat ""))))
@@ -35,9 +36,12 @@
   (or (winner? board) (empty? (available-moves board))))
 
 (defn current-mark [board]
-  (if (odd? (count (available-moves board)))
+    (if (even? (mod (moves-made board) 2))
     "x"
     "o"))
+
+(defn- moves-made [board]
+  (- (count board) (count (available-moves board))))
 
 (defn- position-available? [board position]
   (let [pos (get board position)]

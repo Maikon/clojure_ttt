@@ -3,7 +3,7 @@
             [tic_tac_toe.players :as players]))
 
 (defn print-board [brd]
- (let [pos-counter (range 1 10)]
+ (let [pos-counter (range 1 (+ 1 (count brd)))]
    (apply println
           (map
             #(apply str "\n" (interpose " | " %))
@@ -23,3 +23,12 @@
     (if choice
       choice
       (get-game-choice))))
+
+(defn get-board-size []
+  (println "Please choose a board size:")
+  (println "1) 3x3 2) 4x4")
+  (let [sizes {:1 {:board-size 3} :2 {:board-size 4}}
+        choice ((keyword (read-line)) sizes)]
+    (if choice
+      choice
+      (get-board-size))))
