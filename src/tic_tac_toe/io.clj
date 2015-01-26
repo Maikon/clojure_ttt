@@ -1,13 +1,19 @@
 (ns tic_tac_toe.io
   (:require [tic_tac_toe.board :as board]
-            [tic_tac_toe.players :as players]))
+            [tic_tac_toe.players :as players]
+            [tic_tac_toe.colorize :as colorize]))
+
+(defn set-mark-color [mark]
+  (cond
+    (= mark "x") (colorize/red mark)
+    :else (colorize/green mark)))
 
 (defn print-board [brd]
  (let [pos-counter (range 1 (+ 1 (count brd)))]
    (apply println
           (map
             #(apply str "\n" (interpose " | " %))
-            (board/rows (map #(if (empty? %1) %2 %1) brd pos-counter))))))
+            (board/rows (map #(if (empty? %1) %2 (set-mark-color %1)) brd pos-counter))))))
 
 (defn get-move []
   (println "Please choose a move")
