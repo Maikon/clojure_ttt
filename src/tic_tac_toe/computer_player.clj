@@ -9,7 +9,7 @@
 
 (defn score-board [board]
   (let [score (/ 10.0 (- (count board)
-                        (count (available-moves board))))]
+                         (count (available-moves board))))]
     (- score)))
 
 (defn next-board-with-move [board move]
@@ -21,19 +21,19 @@
     (partial next-board-with-move board)
     (available-moves board)))
 
-(defn score [board]
+(defn highest-scoring [board]
   (let [moves (available-moves board)]
     (if (over? board)
       (score-board board)
-      (apply max (map #(- (score (mark-position board % (current-mark board)) )) moves)))))
+      (apply max (map #(- (highest-scoring (mark-position board % (current-mark board)) )) moves)))))
 
 (defn score-and-move [mark {:keys [board move]}]
-  {:score (- (score board))
-    :move  move})
+  {:score (- (highest-scoring board))
+   :move  move})
 
 (defmethod player/get-move :computer [player]
   (:move (apply max-key :score
                 (map
-    (partial score-and-move
-             (current-mark (:board player)))
-    (get-nodes (:board player))))))
+                  (partial score-and-move
+                           (current-mark (:board player)))
+                  (get-nodes (:board player))))))
